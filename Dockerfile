@@ -1,8 +1,12 @@
-FROM microsoft/aspnet
+# Base of your container
+FROM microsoft/aspnet:latest
 
-ADD . .
-WORKDIR ./src/WebApplication1
-RUN dnu restore
+# Copy the project into folder and then restore packages
+COPY . /app
+WORKDIR /app/src/WebApplication1
+RUN ["dnu","restore"]
+
+# Open this port in the container
 EXPOSE 5000
-
-ENTRYPOINT dnx web
+# Start application
+ENTRYPOINT ["dnx","-p","project.json", "web"]
