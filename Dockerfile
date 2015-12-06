@@ -1,5 +1,7 @@
 # Base of your container
-FROM microsoft/aspnet:latest
+#FROM microsoft/aspnet:latest
+FROM yuki1051/ms-aspnet
+#FROM sunside/aspnet
 
 # Copy the project into folder and then restore packages
 COPY . /app
@@ -9,4 +11,4 @@ RUN ["dnu","restore"]
 # Open this port in the container
 EXPOSE 5000
 # Start application
-ENTRYPOINT ["dnx","-p","project.json", "web"]
+CMD ["dnx", "web"]
